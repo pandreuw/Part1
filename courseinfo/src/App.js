@@ -1,19 +1,25 @@
-import React from 'react'
+  import React from 'react'
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
 
   return (
     <div>
       <PartHeader ct={course} />
-      <Content p1={part1} ex1={exercises1} p2={part2} ex2={exercises2} p3={part3} ex3={exercises3} />
-      <Count ex1={exercises1} ex2={exercises2} ex3={exercises3}/>
+      <Content p1={part1} p2={part2} p3={part3} />
+      {/* <Count ex1={exercises1} ex2={exercises2} ex3={exercises3}/> */}
     </div>
 
   )
@@ -30,16 +36,24 @@ const PartHeader = (props) => {
 }
 
 const Content = (props) =>{
+  console.log("Hola probando")
+  console.log(props.p1.name)
+  console.log(props.p1.exercises)
+  console.log(props.p2.name)
+  console.log(props.p2.exercises)
+  console.log(props.p3.name)
+  console.log(props.p3.exercises)
   return(
     <>
       <p>
-        {props.p1} {props.ex1}
+        {props.p1.name} {props.p1.exercises} 
+
       </p>
       <p>
-        {props.p2} {props.ex2}
+        {props.p2.name} {props.p2.exercises}
       </p>
       <p>
-        {props.p3} {props.ex3}
+        {props.p3.name} {props.p3.exercises}
       </p>
     </>
   )
