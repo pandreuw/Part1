@@ -19,7 +19,7 @@ const App = () => {
     <div>
       <PartHeader ct={course} />
       <Content p1={part1} p2={part2} p3={part3} />
-      {/* <Count ex1={exercises1} ex2={exercises2} ex3={exercises3}/> */}
+      <Count ex1={part1.exercises} ex2={part2.exercises} ex3={part3.exercises}/>
     </div>
 
   )
