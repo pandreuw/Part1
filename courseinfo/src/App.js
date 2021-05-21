@@ -1,35 +1,44 @@
   import React from 'react'
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
-  }
-  const part2 = {
-    name: 'Using props to pass data',
-    exercises: 7
-  }
-  const part3 = {
-    name: 'State of a component',
-    exercises: 14
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data', 
+        exercises: 7
+      },
+      {
+        name: 'State of a component', 
+        exercises: 14
+      }
+    ]
   }
 
   return (
+    // by modifying the object course, I had to add the constant name and by using '.' I could access the parameter required. 
     <div>
-      <PartHeader ct={course} />
-      <Content p1={part1} p2={part2} p3={part3} />
-      <Count ex1={part1.exercises} ex2={part2.exercises} ex3={part3.exercises}/>
+      {/* Tried to use ellipsis but did not worked on the next instruction, seems that = must be added. */}
+      <PartHeader ct={course.name} />
+      {/* To pass an array as an argument I had to add '...' on ES6, before (ES5) we had to use the function .apply https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply*/}
+      {/* From <Content {p1={parts[0]} p2={parts[1]} p3={parts[2]}/>  to: */}
+      <Content {...course.parts}/>
+      {/* From an array of objects, pass just a property https://stackoverflow.com/questions/19590865/from-an-array-of-objects-extract-value-of-a-property-as-array*/}
+      {/* From <Content {p1={parts[0]} p2={parts[1]} p3={parts[2]}/>  to: */}
+      <Count {...course.parts.map(ex => ex.exercises)}/>
     </div>
-
   )
 }
 
-const PartHeader = (props) => {
+const PartHeader = (foo) => {
   return(
     <>
       <h1>
-        {props.ct}
+        {foo.ct}
       </h1>
     </>
   )
@@ -37,23 +46,18 @@ const PartHeader = (props) => {
 
 const Content = (props) =>{
   console.log("Hola probando")
-  console.log(props.p1.name)
-  console.log(props.p1.exercises)
-  console.log(props.p2.name)
-  console.log(props.p2.exercises)
-  console.log(props.p3.name)
-  console.log(props.p3.exercises)
+  
   return(
     <>
       <p>
-        {props.p1.name} {props.p1.exercises} 
-
+        {props[0].name} {props[0].exercises} 
       </p>
       <p>
-        {props.p2.name} {props.p2.exercises}
+        {props[1].name} {props[1].exercises} 
       </p>
+      {/* I had a lot of issues trying to figure it out, I was using base 1 from RAPID programming, mistake from my side. */}
       <p>
-        {props.p3.name} {props.p3.exercises}
+        {props[2].name} {props[2].exercises} 
       </p>
     </>
   )
@@ -62,61 +66,10 @@ const Content = (props) =>{
 const Count = (props) =>{
   return(
     <>
-    <p>Number of exercises {props.ex1 + props.ex2 + props.ex3}</p>
+    <p>Number of exercises {props[0] + props[1] + props[2]}</p>
     </>
   )
 }
 
-/*
-Change this
-const App = () => {
-  // const-definitions
-
-  return (
-    <div>
-      <Header course={course} />
-      <Content ... />
-      <Total ... />
-    </div>
-  )
-}
-
-for this:
-const Content = ... {
-  return (
-    <div>
-      <Part .../>
-      <Part .../>
-      <Part .../>
-    </div>
-  )
-}
-
-*/
 
 export default App
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
