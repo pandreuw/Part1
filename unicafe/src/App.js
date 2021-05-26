@@ -8,6 +8,16 @@ const Button = (props) => (
   </button>
 )
 
+// a proper place to define a component
+const Statistics = ({ _good, _neutral, _bad }) => {
+  // ...
+  return (<div>
+    <Display text="Total of reviews " value={_good + _bad + _neutral} />
+    <Display text="Average " value={(_bad) / (_good + _bad + _neutral)} />
+    <Display text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
+  </div>)
+}
+
 
 const App = () => {
   // save clicks of each button to its own state
@@ -30,9 +40,7 @@ const App = () => {
       <Display text="Good " value={good} />
       <Display text="Neutral " value={neutral} />
       <Display text="Bad " value={bad} />
-      <Display text="Total of reviews " value={good+bad+neutral} />
-      <Display text="Average " value={(good-bad)/(good+bad+neutral)} />
-      <Display text="Percentage of Positive " value={(good)*100/(good+bad+neutral)} closingtext="%" />
+      <Statistics _good={good} _neutral={neutral} _bad={bad} />
     </div>
   )
 }
