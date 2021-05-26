@@ -11,11 +11,33 @@ const Button = (props) => (
 // a proper place to define a component
 const Statistics = ({ _good, _neutral, _bad }) => {
   // ...
-  return (<div>
-    <Display text="Total of reviews " value={_good + _bad + _neutral} />
-    <Display text="Average " value={(_bad) / (_good + _bad + _neutral)} />
-    <Display text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
-  </div>)
+  console.log("debug7")
+  return (
+    <div>
+      <Display text="Total of reviews " value={_good + _bad + _neutral} />
+      <Display text="Average " value={(_good - + _bad) / (_good + _bad + _neutral)} />
+      <Display text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
+    </div>
+  )
+}
+
+const ConditionalDisplay = ({ goodcount, neutralcount, badcount }) => {
+  console.log("debug4")
+  if (goodcount > 0 || neutralcount > 0 || badcount > 0) {
+    console.log("debug5")
+    return (
+      <div>
+        <Display text="Good " value={goodcount} />
+        <Display text="Neutral " value={neutralcount} />
+        <Display text="Bad " value={badcount} />
+        <Statistics _good={goodcount} _neutral={neutralcount} _bad={badcount} />
+      </div>
+    )
+  } else {
+    console.log("debug6")
+    return (<div><h3>No feedback given</h3></div>)
+  }
+
 }
 
 
@@ -25,22 +47,15 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const [totalreviews, setTotalReviews] = useState(0)
-
-
+  console.log("debug1")
   return (
     <div>
       <h1>Give Feedback</h1>
       <Button handleClick={() => setGood(good + 1)} text="Good" />
       <Button handleClick={() => setNeutral(neutral + 1)} text="Neutral" />
       <Button handleClick={() => setBad(bad + 1)} text="Bad" />
-      {/* <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} /> */}
       <h2>Statistics</h2>
-      <Display text="Good " value={good} />
-      <Display text="Neutral " value={neutral} />
-      <Display text="Bad " value={bad} />
-      <Statistics _good={good} _neutral={neutral} _bad={bad} />
+      <ConditionalDisplay goodcount={good} neutralcount={neutral} badcount={bad} />
     </div>
   )
 }
