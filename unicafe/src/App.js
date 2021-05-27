@@ -15,12 +15,41 @@ const Statistics = ({ _good, _neutral, _bad }) => {
   console.log("debug7")
   return (
     <div>
-      <Statistic text="Good " value={_good} />
+      {/* <Statistic text="Good " value={_good} />
       <Statistic text="Neutral " value={_neutral} />
       <Statistic text="Bad " value={_bad} />
       <Statistic text="Total of reviews " value={_good + _bad + _neutral} />
       <Statistic text="Average " value={(_good - + _bad) / (_good + _bad + _neutral)} />
-      <Statistic text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
+      <Statistic text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" /> */}
+
+      <table>
+        <tbody>
+          <tr>
+            <td><Statistic text="Good "/></td>
+            <td><Statistic value={_good} /></td>
+          </tr>
+          <tr>
+            <td><Statistic text="Neutral " /></td>
+            <td><Statistic value={_neutral} /></td>
+          </tr>
+          <tr>
+            <td><Statistic text="Bad " /></td>
+            <td><Statistic value={_bad} /></td>
+          </tr>
+          <tr>
+            <td><Statistic text="Total of reviews " value={_good} /></td>
+            <td><Statistic value={_good + _bad + _neutral} /></td>
+          </tr>
+          <tr>
+            <td><Statistic text="Average " /></td>
+            <td><Statistic value={(_good - + _bad) / (_good + _bad + _neutral)} /></td>
+          </tr>
+          <tr>
+            <td><Statistic text="Percentage of Positive " /></td>
+            <td><Statistic value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
