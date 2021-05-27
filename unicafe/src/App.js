@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
-const Display = ({ text, value, closingtext }) => <div>{text}{value}{closingtext}</div>
+const Statistic = ({ text, value, closingtext }) => <div>{text}{value}{closingtext}</div>
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>
-    {props.text}
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
   </button>
 )
+
 
 // a proper place to define a component
 const Statistics = ({ _good, _neutral, _bad }) => {
@@ -14,9 +15,12 @@ const Statistics = ({ _good, _neutral, _bad }) => {
   console.log("debug7")
   return (
     <div>
-      <Display text="Total of reviews " value={_good + _bad + _neutral} />
-      <Display text="Average " value={(_good - + _bad) / (_good + _bad + _neutral)} />
-      <Display text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
+      <Statistic text="Good " value={_good} />
+      <Statistic text="Neutral " value={_neutral} />
+      <Statistic text="Bad " value={_bad} />
+      <Statistic text="Total of reviews " value={_good + _bad + _neutral} />
+      <Statistic text="Average " value={(_good - + _bad) / (_good + _bad + _neutral)} />
+      <Statistic text="Percentage of Positive " value={(_good) * 100 / (_good + _bad + _neutral)} closingtext="%" />
     </div>
   )
 }
@@ -27,9 +31,6 @@ const ConditionalDisplay = ({ goodcount, neutralcount, badcount }) => {
     console.log("debug5")
     return (
       <div>
-        <Display text="Good " value={goodcount} />
-        <Display text="Neutral " value={neutralcount} />
-        <Display text="Bad " value={badcount} />
         <Statistics _good={goodcount} _neutral={neutralcount} _bad={badcount} />
       </div>
     )
