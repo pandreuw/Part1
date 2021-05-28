@@ -37,7 +37,7 @@ const Statistics = ({ _good, _neutral, _bad }) => {
             <td><Statistic value={_bad} /></td>
           </tr>
           <tr>
-            <td><Statistic text="Total of reviews " value={_good} /></td>
+            <td><Statistic text="Total of reviews "/></td>
             <td><Statistic value={_good + _bad + _neutral} /></td>
           </tr>
           <tr>
