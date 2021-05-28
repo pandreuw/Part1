@@ -6,6 +6,20 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
+/**
+ * From https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
+* Returns a random integer between min (inclusive) and max (inclusive).
+* The value is no lower than min (or the next integer greater than min
+* if min isn't an integer) and no greater than max (or the next integer
+* lower than max if max isn't an integer).
+* Using Math.round() will give you a non-uniform distribution!
+*/
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -18,13 +32,15 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
-  const increaseByOne = () => setSelected(selected + 1)
+  const nextOne = () => {
+    setSelected(getRandomInt(0, anecdotes.length))
+  }
 
   return (
     <div>
       {anecdotes[selected]}
       <br></br>
-      <Button handleClick={increaseByOne} text='next anecdote'/>
+      <Button handleClick={nextOne} text='next anecdote'/>
     </div>
   )
 }
