@@ -6,6 +6,9 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
+const Display = ({ text, value, closingtext }) => <div>{text}{value}{closingtext}</div>
+
+
 /**
  * From https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
 * Returns a random integer between min (inclusive) and max (inclusive).
@@ -29,8 +32,12 @@ const App = () => {
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
   ]
+
+  const initialValue = [
+    { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}];
    
   const [selected, setSelected] = useState(0)
+  const [vote, setVote] = useState([])
 
   const nextOne = () => {
     setSelected(getRandomInt(0, anecdotes.length-1))
@@ -40,6 +47,8 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br></br>
+      <Display text="has " value={vote} closingtext=" votes"/>
+      <Button handleClick={() => setVote(vote + 1)} text="vote" />
       <Button handleClick={nextOne} text='next anecdote'/>
     </div>
   )
