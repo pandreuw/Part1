@@ -33,7 +33,7 @@ const App = () => {
   const [selected, setSelected] = useState(0)
 
   const nextOne = () => {
-    setSelected(getRandomInt(0, anecdotes.length))
+    setSelected(getRandomInt(0, anecdotes.length-1))
   }
 
   return (
