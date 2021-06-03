@@ -33,23 +33,61 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
   ]
 
-  const initialValue = [
-    { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0}];
-   
-  const [selected, setSelected] = useState(0)
-  const [vote, setVote] = useState([])
 
-  const nextOne = () => {
-    setSelected(getRandomInt(0, anecdotes.length-1))
+
+  // BIGGGG ISSSUEEE IS USED THIS FORMAT AND I WAS BREAKING MY HEAADDDD!!!! const initialValue = [{ 0: 4, 1: 5, 2: 6, 3: 0, 4: 0, 5: 0 }];
+  // I started the exersices to use as an array, then I decided to change it to object, I left the square brackets on, so for sure the system thougth I was using an array of objects.
+  const initialValue = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+  const [selected, setSelected] = useState(0)
+  const [vote, setVote] =useState(initialValue)
+  
+
+  
+  const ShowVotes = ({index, matriz}) => {
+    console.log("ShowVotes executed")
+    let copy={...matriz}
+    return(
+    <>
+      <Display text="has " value={copy[index]} closingtext=" votes"/>
+    </>
+    )
   }
+
+  const nextOne = () => { 
+    console.log("nextOne executed")
+    setSelected(getRandomInt(0, anecdotes.length - 1))
+  }
+
+  const giveAVote = () => { 
+    console.log("giveAVote executed")
+    let copy={...vote}
+    copy[selected]+=1
+    setVote(copy)
+  }
+
+
+  //this does not help to show the value of a state
+  // console.log("initialValue"+{initialValue})
+  // console.log("selected "+{selected})
+  // console.log("vote "+{vote})
+
+  // from https://stackoverflow.com/questions/7389069/how-can-i-make-console-log-show-the-current-state-of-an-object
+  // this help to show the value of a state
+  console.log("selected "+JSON.parse(JSON.stringify(selected)));
+  console.log("vote")
+  console.log(JSON.parse(JSON.stringify(vote)));
 
   return (
     <div>
+      <p id="Line 65"></p>
       {anecdotes[selected]}
       <br></br>
-      <Display text="has " value={vote} closingtext=" votes"/>
-      <Button handleClick={() => setVote(vote + 1)} text="vote" />
-      <Button handleClick={nextOne} text='next anecdote'/>
+      {/* <Count {...course.parts.map(ex => ex.exercises)}/> */}
+      {/* <ShowVotes index={selected} matriz={JSON.parse(JSON.stringify(vote))}/> */}
+      <ShowVotes index={selected} matriz={vote}/>
+      <Button handleClick={giveAVote} text="vote" />
+      <Button handleClick={nextOne} text='next anecdote' />
     </div>
   )
 }
